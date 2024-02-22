@@ -1,6 +1,7 @@
 import { Gym, Prisma } from '@prisma/client';
 
 import { GymsRepository } from '../gyms-repository';
+import { randomUUID } from 'crypto';
 
 export class InMemoryGymsRepository implements GymsRepository {
   private static instance: InMemoryGymsRepository;
@@ -17,21 +18,22 @@ export class InMemoryGymsRepository implements GymsRepository {
     return InMemoryGymsRepository.instance;
   }
 
-  async create(data: Gym): Promise<Gym> {
-    const gym = { ...data };
+  async create(data: Prisma.GymCreateInput) {
+    const gym = {
+      id: data.id ?? (randomUUID() as string),
+      title: data.title,
+      description: data.description ?? null,
+      phone: data.phone ?? null,
+      latitude: new Prisma.Decimal(data.latitude.toString()),
+      longitude: new Prisma.Decimal(data.longitude.toString()),
+      create_at: new Date(),
+    };
     this.#gymsRepository.push(gym);
 
     return gym;
   }
 
-  async findById(id: string): Promise<{
-    id: string;
-    title: string;
-    description: string;
-    phone: string;
-    latitude: Prisma.Decimal;
-    longitude: Prisma.Decimal;
-  } | null> {
+  async findById(id: string): Promise<Gym | null> {
     const gym = this.#gymsRepository.find((gym) => gym.id === id);
     return gym ?? null;
   }
