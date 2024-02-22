@@ -1,0 +1,14 @@
+.vscode
+
+# Dependencies
+
+node_modules
+
+#
+
+build
+dist
+
+
+# Testing
+coverage
