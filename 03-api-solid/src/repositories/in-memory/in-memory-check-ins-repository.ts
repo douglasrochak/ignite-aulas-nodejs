@@ -18,6 +18,10 @@ export class InMemoryCheckInsRepository implements CheckInsRepository {
     return InMemoryCheckInsRepository.instance;
   }
 
+  clear() {
+    this.#checkInsRepository = [];
+  }
+
   async create(data: Prisma.CheckInUncheckedCreateInput) {
     const checkIn = {
       id: data.id ?? randomUUID(),
@@ -53,5 +57,18 @@ export class InMemoryCheckInsRepository implements CheckInsRepository {
     });
 
     return Promise.resolve(checkIn ?? null);
+  }
+
+  async findManyByUserId(userId: string, page: number): Promise<CheckIn[]> {
+    const MAX_REGISTER_PER_PAGE = 20;
+    return this.#checkInsRepository
+      .filter((checkIn) => checkIn.user_id === userId)
+      .slice((page - 1) * MAX_REGISTER_PER_PAGE, page * MAX_REGISTER_PER_PAGE);
+  }
+
+  async countByUserId(userId: string): Promise<number> {
+    return this.#checkInsRepository.filter(
+      (checkIn) => checkIn.user_id === userId
+    ).length;
   }
 }
