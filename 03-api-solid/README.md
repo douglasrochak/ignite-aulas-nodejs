@@ -7,9 +7,10 @@ Gympass style app
 [X] - Cadastrar
 [X] - Login
 [X] - Perfil
-[ ] - Histórico de check-in
-[ ] - Buscar academias próximas
-[ ] - Buscar academias pelo nome
+[X] - Numero de check-ins realizados pelo usuário
+[X] - Histórico de check-in
+[x] - Buscar academias próximas (Distancia menor que 10 km)
+[X] - Buscar academias pelo nome
 [X] - Check-in em uma academia
 [ ] - Validar check-in de um usuário
 [X] - Cadastro de academia
