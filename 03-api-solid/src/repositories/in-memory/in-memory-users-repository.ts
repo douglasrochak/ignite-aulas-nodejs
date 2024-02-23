@@ -17,6 +17,10 @@ export class InMemoryUsersRepository implements UsersRepository {
     return InMemoryUsersRepository.instance;
   }
 
+  clear() {
+    this.#usersRepository = [];
+  }
+
   async findById(id: string): Promise<User | null> {
     const user = this.#usersRepository.find((user: User) => user.id === id);
     return user ?? null;
