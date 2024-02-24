@@ -12,7 +12,7 @@ Gympass style app
 [x] - Buscar academias próximas (Distancia menor que 10 km)
 [X] - Buscar academias pelo nome
 [X] - Check-in em uma academia
-[ ] - Validar check-in de um usuário
+[X] - Validar check-in de um usuário
 [X] - Cadastro de academia
 
 ## RN
@@ -20,7 +20,7 @@ Gympass style app
 [X] - e-mail único
 [X] - usuário não pode fazer 2 check-ins no mesmo dia
 [X] - usuário não pode fazer check-in se não estiver perto (100m) academia
-[ ] - check-in só pode ser validado até 20 minutos após criado
+[X] - check-in só pode ser validado até 20 minutos após criado
 [ ] - check-in só pode ser validado por administradores
 [ ] - academia só pode ser cadastrada por administradores
 
@@ -28,5 +28,5 @@ Gympass style app
 
 [X] - A senha do usuário precisa estar criptografada
 [X] - Banco PostgreSQL
-[ ] - Todas listas de dados precisam estar paginadas com 20 itens por página
+[X] - Todas listas de dados precisam estar paginadas com 20 itens por página
 [ ] - Autenticação por JWT
