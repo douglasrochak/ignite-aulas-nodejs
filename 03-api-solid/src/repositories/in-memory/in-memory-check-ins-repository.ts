@@ -18,6 +18,10 @@ export class InMemoryCheckInsRepository implements CheckInsRepository {
     return InMemoryCheckInsRepository.instance;
   }
 
+  get items() {
+    return this.#checkInsRepository;
+  }
+
   clear() {
     this.#checkInsRepository = [];
   }
@@ -32,6 +36,16 @@ export class InMemoryCheckInsRepository implements CheckInsRepository {
     };
 
     this.#checkInsRepository.push(checkIn);
+    return checkIn;
+  }
+
+  async save(checkIn: CheckIn): Promise<CheckIn> {
+    const checkInIndex = this.#checkInsRepository.findIndex(
+      (c) => c.id === checkIn.id
+    );
+
+    if (checkInIndex >= 0) this.#checkInsRepository[checkInIndex] = checkIn;
+
     return checkIn;
   }
 
@@ -64,6 +78,14 @@ export class InMemoryCheckInsRepository implements CheckInsRepository {
     return this.#checkInsRepository
       .filter((checkIn) => checkIn.user_id === userId)
       .slice((page - 1) * MAX_REGISTER_PER_PAGE, page * MAX_REGISTER_PER_PAGE);
+  }
+
+  async findById(id: string) {
+    const checkIn = this.#checkInsRepository.find(
+      (checkIn) => checkIn.id === id
+    );
+    if (!checkIn) return null;
+    return checkIn;
   }
 
   async countByUserId(userId: string): Promise<number> {
