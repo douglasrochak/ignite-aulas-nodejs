@@ -14,7 +14,7 @@ describe('Search Gyms Controller', () => {
   });
 
   it('Should be able to search gyms', async () => {
-    const { token } = await createAndAuthenticateUser(app);
+    const { token } = await createAndAuthenticateUser(app, true);
 
     await request(app.server)
       .post('/gyms ')
